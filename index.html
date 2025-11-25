@@ -1,51 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Mobile Recharge Portal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .container {
-            width: 350px;
-            margin: auto;
-            padding: 20px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-        }
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 16px;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-        }
-        .success {
-            color: green;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Mobile Recharge Portal</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .card {
+        background: #ffffff;
+        width: 380px;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #4facfe;
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background: #4facfe;
+        color: white;
+        border: none;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #3793fc;
+    }
+
+    .error {
+        color: #ff3b3b;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .success {
+        margin-top: 15px;
+        padding: 10px;
+        background: #c8ffd4;
+        color: #0a7a20;
+        border-left: 5px solid #10b344;
+        border-radius: 6px;
+        display: none;
+    }
+</style>
+
 </head>
 
 <body>
 
-<div class="container">
-    <h2>Mobile Recharge Portal</h2>
+<div class="card">
+    <h2>📱 Mobile Recharge</h2>
 
-    <label>Phone Number (10 digits)</label>
-    <input type="text" id="phone" maxlength="10" placeholder="Enter phone number">
+    <input type="text" id="phone" maxlength="10" placeholder="Enter Phone Number (10 digits)">
     <div id="phoneError" class="error"></div>
 
-    <label>Recharge Amount (10 - 1000)</label>
-    <input type="number" id="amount" min="10" max="1000" placeholder="Enter recharge amount">
+    <input type="number" id="amount" min="10" max="1000" placeholder="Enter Amount (₹10 - ₹1000)">
     <div id="amountError" class="error"></div>
 
-    <button onclick="validateRecharge()">Recharge</button>
+    <button onclick="validateRecharge()">Recharge Now</button>
 
     <div id="successMsg" class="success"></div>
 </div>
@@ -55,34 +100,32 @@ function validateRecharge() {
     let phone = document.getElementById("phone").value.trim();
     let amount = document.getElementById("amount").value.trim();
 
-    document.getElementById("phoneError").innerText = "";
-    document.getElementById("amountError").innerText = "";
-    document.getElementById("successMsg").innerText = "";
+    let phoneError = document.getElementById("phoneError");
+    let amountError = document.getElementById("amountError");
+    let successMsg = document.getElementById("successMsg");
 
-    let isValid = true;
+    phoneError.innerText = "";
+    amountError.innerText = "";
+    successMsg.style.display = "none";
 
-    // Validate Phone (exactly 10 digits)
+    let valid = true;
+
     if (!/^[0-9]{10}$/.test(phone)) {
-        document.getElementById("phoneError").innerText = "Phone number must be exactly 10 digits.";
-        isValid = false;
+        phoneError.innerText = "Phone number must be exactly 10 digits.";
+        valid = false;
     }
 
-    // Validate amount (between 10 and 1000)
     if (amount < 10 || amount > 1000 || amount === "") {
-        document.getElementById("amountError").innerText = "Amount must be between 10 and 1000.";
-        isValid = false;
+        amountError.innerText = "Amount must be between ₹10 and ₹1000.";
+        valid = false;
     }
 
-    // If valid
-    if (isValid) {
-        document.getElementById("successMsg").innerText =
-            "Recharge successful for " + phone + " with amount ₹" + amount + "!";
+    if (valid) {
+        successMsg.innerText = "Recharge Successful! ₹" + amount + " sent to " + phone;
+        successMsg.style.display = "block";
     }
 }
 </script>
 
 </body>
 </html>
-
-
-
