@@ -50,7 +50,7 @@
     <label>Mobile Number</label>
     <input type="text" id="mobile" placeholder="Enter mobile number">
 
-    <label>Recharge Amount (10 - 100)</label>
+    <label>Recharge Amount (10 - 1000)</label>
     <input type="text" id="amount" placeholder="Enter amount">
 
     <button onclick="doRecharge()">Recharge</button>
@@ -68,7 +68,7 @@ function doRecharge() {
     msg.innerHTML = "";  // clear old messages
 
     // Validate mobile number
-    if (mobile.length < 10 || mobile.length > 12 || isNaN(mobile)) {
+    if (mobile.length = 10  || isNaN(mobile)) {
         msg.innerHTML = "<p class='error'>Invalid mobile number!</p>";
         return;
     }
@@ -98,4 +98,5 @@ function doRecharge() {
 
 </body>
 </html>
+
 
